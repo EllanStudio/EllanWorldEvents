@@ -21,12 +21,16 @@ final class WorldEventsCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("ellanworldevents.admin")) {
-            sender.sendMessage(plugin.message("no-permission"));
+        if (args.length == 0 || args[0].equalsIgnoreCase("status")) {
+            if (!sender.hasPermission("ellanworldevents.status")) {
+                sender.sendMessage(plugin.message("no-permission"));
+                return true;
+            }
+            sender.sendMessage(plugin.color("&7[&3&l艾尔岚世界事件&7] &f" + seaEvents.status()));
             return true;
         }
-        if (args.length == 0 || args[0].equalsIgnoreCase("status")) {
-            sender.sendMessage(plugin.color("&7[&3&l艾尔岚世界事件&7] &f" + seaEvents.status()));
+        if (!sender.hasPermission("ellanworldevents.admin")) {
+            sender.sendMessage(plugin.message("no-permission"));
             return true;
         }
         switch (args[0].toLowerCase(Locale.ROOT)) {

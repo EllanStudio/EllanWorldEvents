@@ -11,8 +11,10 @@ commands:
     description: Manage Ellan world events.
     usage: /ellanworldevents <status|start|stop|reload|anchor>
     aliases: [ewe]
-    permission: ellanworldevents.admin
 permissions:
+  ellanworldevents.status:
+    description: View the current world event status.
+    default: true
   ellanworldevents.admin:
     description: Manage Ellan world events.
     default: op

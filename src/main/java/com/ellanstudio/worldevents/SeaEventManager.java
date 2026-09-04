@@ -405,8 +405,13 @@ public final class SeaEventManager implements Listener {
             return;
         }
         Map<UUID, Double> damage = new HashMap<>(active.damage);
-        for (Map.Entry<UUID, DamageSnapshotBundle> entry : event.getMob().getDamageRecord().getDamagingPlayers().entrySet()) {
-            damage.merge(entry.getKey(), entry.getValue().getTotalDamage(), Math::max);
+        var damageRecord = event.getMob().getDamageRecord();
+        if (damageRecord != null) {
+            for (Map.Entry<UUID, DamageSnapshotBundle> entry : damageRecord.getDamagingPlayers().entrySet()) {
+                damage.merge(entry.getKey(), entry.getValue().getTotalDamage(), Math::max);
+            }
+        } else {
+            plugin.getLogger().warning("MythicMobs did not provide a damage record for the sea boss; using tracked damage instead.");
         }
         UUID killer = event.getKiller() == null ? null : event.getKiller().getUniqueId();
         Bukkit.getScheduler().runTask(plugin, () -> completeEvent(damage, killer));

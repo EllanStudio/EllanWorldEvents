@@ -1,5 +1,15 @@
 timezone: Asia/Shanghai
-network-broadcast-command: 'cmi bbroadcast !{message} -s:spawn,survival,redstone'
+network-broadcast-command: ''
+
+# CMI bbroadcast depends on BungeeCord compatibility and is not used on Velocity.
+# Each backend subscribes to this Redis channel so announcements appear on all servers.
+redis:
+  enabled: true
+  host: 127.0.0.1
+  port: 6379
+  password: ''
+  database: 0
+  channel: ellan:world-events
 
 messages:
   prefix: '&7[&3&l艾尔岚世界事件&7] '

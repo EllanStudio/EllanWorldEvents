@@ -16,12 +16,26 @@ public final class EllanWorldEventsPlugin extends JavaPlugin {
     private SeaEventManager seaEvents;
     private DragonManager dragons;
     private WorldEventsExpansion expansion;
+    private RedisBroadcaster redis;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         stateFile = new File(getDataFolder(), "state.yml");
         state = YamlConfiguration.loadConfiguration(stateFile);
+
+        if (getConfig().getBoolean("redis.enabled", true)) {
+            redis = new RedisBroadcaster(
+                    this,
+                    getConfig().getString("redis.host", "127.0.0.1"),
+                    getConfig().getInt("redis.port", 6379),
+                    getConfig().getString("redis.password", ""),
+                    getConfig().getInt("redis.database", 0),
+                    getConfig().getString("redis.channel", "ellan:world-events"),
+                    message -> runOnMainThread(() -> broadcastLocal(message))
+            );
+            redis.start();
+        }
 
         seaEvents = new SeaEventManager(this);
         dragons = new DragonManager(this);
@@ -49,6 +63,9 @@ public final class EllanWorldEventsPlugin extends JavaPlugin {
         if (expansion != null) {
             expansion.unregister();
         }
+        if (redis != null) {
+            redis.close();
+        }
         if (seaEvents != null) {
             seaEvents.disable();
         }
@@ -62,6 +79,14 @@ public final class EllanWorldEventsPlugin extends JavaPlugin {
         reloadConfig();
         seaEvents.reload();
         dragons.reload();
+    }
+
+    public void runOnMainThread(Runnable runnable) {
+        Bukkit.getScheduler().runTask(this, runnable);
+    }
+
+    public void broadcastLocal(String message) {
+        Bukkit.broadcastMessage(message);
     }
 
     public YamlConfiguration state() {
@@ -100,6 +125,10 @@ public final class EllanWorldEventsPlugin extends JavaPlugin {
     }
 
     public void networkBroadcast(String coloredMessage) {
+        if (redis != null) {
+            redis.publishAsync(coloredMessage);
+            return;
+        }
         String template = getConfig().getString("network-broadcast-command", "");
         if (template == null || template.isBlank()) {
             Bukkit.broadcastMessage(coloredMessage);

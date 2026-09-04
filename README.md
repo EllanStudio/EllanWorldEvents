@@ -22,10 +22,12 @@
 ## 部署
 
 1. 安装 MythicMobs、ModelEngine、MythicCrucible 和 VoyageOfTheSeas。
-2. 将插件 JAR 放入 `plugins/`。
+2. 将插件 JAR 放入每一台需要接收世界事件公告的后端服 `plugins/`。三服必须使用相同的 Redis 地址和频道。
 3. 将 `src/main/resources/mythic-pack/EllanSeaEvents` 放入 `plugins/MythicMobs/Packs/`。
 4. 将 Spawn 的 `spigot.yml` 中 `settings.attribute.maxHealth.max` 提升到至少 `65536.0`。
 5. 启动服务器，在安全海面执行 `/ewe anchor add <名称>` 保存至少一个刷新点。
+
+事件公告默认通过本机 Redis `127.0.0.1:6379` 的 `ellan:world-events` 频道同步，不依赖 CMI 的 `bbroadcast`。若三台后端不在同一台主机，请将 `config.yml` 中的 Redis 地址改为三台都能访问的内网地址，并设置密码。
 
 ## 管理命令
 

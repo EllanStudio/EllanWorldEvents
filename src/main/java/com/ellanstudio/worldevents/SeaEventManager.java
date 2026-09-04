@@ -708,7 +708,7 @@ public final class SeaEventManager implements Listener {
         SeaTier tier = tiers.get(active.tierKey);
         long seconds = Math.max(0, (active.endsAt - System.currentTimeMillis()) / 1000);
         return plugin.plain(tier == null ? active.tierKey : tier.name()) + "，剩余 "
-                + seconds / 60 + "分" + seconds % 60 + "秒，坐标 "
+                + seconds / 60 + "分" + seconds % 60 + "秒，主城海域坐标 "
                 + active.lastLocation.getBlockX() + ", " + active.lastLocation.getBlockZ();
     }
 

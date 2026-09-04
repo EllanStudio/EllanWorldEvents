@@ -17,8 +17,8 @@ messages:
   reloaded: '&a配置已重新加载。'
   sea-already-active: '&c已有海防事件正在进行。'
   sea-not-active: '&e当前没有进行中的海防事件。'
-  sea-started: '&b海防哨站发现了 &f{name}&b，坐标 &e{x}, {z}&b！请驾驶战船前往迎击，限时 &f{minutes} 分钟&b。'
-  sea-warning: '&e{name} &7将在 &f{minutes} 分钟&7后撤离，当前坐标 &e{x}, {z}&7。'
+  sea-started: '&b主城海域发现了 &f{name}&b，主城海域坐标 &e{x}, {z}&b！请驾驶战船前往迎击，限时 &f{minutes} 分钟&b。使用 &f/ewe status &b查看实时坐标。'
+  sea-warning: '&e{name} &7将在 &f{minutes} 分钟&7后撤离，当前主城海域坐标 &e{x}, {z}&7。使用 &f/ewe status &7查看实时坐标。'
   sea-defeated: '&a{name} 已被击沉！&7共有 &f{count} &7名玩家取得有效贡献，战利品已发放。'
   sea-expired: '&c{name} 已驶离艾尔岚海域，本次海防行动失败。'
   sea-reward: '&a海防奖励：&e{coins} 艾尔岚金币&a、&c{reputation} 赤铁原声望&a。'
@@ -57,27 +57,27 @@ sea-events:
   anchors:
     - id: northeast_ocean
       world: world
-      x: 1088.5
+      x: 106.5
       y: 65.0
-      z: 256.5
+      z: -803.5
       yaw: 135.0
     - id: northwest_ocean
       world: world
-      x: -1351.5
+      x: -115.5
       y: 65.0
-      z: 852.5
+      z: -791.5
       yaw: -135.0
     - id: southwest_ocean
       world: world
-      x: -1267.5
+      x: -222.5
       y: 65.0
-      z: -1271.5
+      z: -186.5
       yaw: -45.0
     - id: southeast_ocean
       world: world
-      x: 1140.5
+      x: 169.5
       y: 65.0
-      z: -1739.5
+      z: -393.5
       yaw: 45.0
   tiers:
     galley:

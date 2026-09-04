@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ellanstudio'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://mvn.lumine.io/repository/maven-public/' }
+    maven { url = 'https://repo.extendedclip.com/releases/' }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT'
+    compileOnly 'io.lumine:Mythic-Dist:5.12.1'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+
+    testImplementation platform('org.junit:junit-bom:5.14.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+tasks.named('jar') {
+    archiveBaseName = 'EllanWorldEvents'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

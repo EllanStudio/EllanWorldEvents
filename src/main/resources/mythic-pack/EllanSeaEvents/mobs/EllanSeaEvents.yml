@@ -1,0 +1,55 @@
+EllanSeaGalley:
+  Template: VOTS2NPCGalleyPirate
+  Display: '&e&l艾尔岚海防目标 &8- &f海盗桨帆船 &7<&c<caster.hp{round=0}>&7/&c<caster.mhp>&7>'
+  Health: 3500
+  Options:
+    Despawn: NEVER
+    Persistent: true
+  BossBar:
+    Enabled: true
+    Title: '&e海盗桨帆船 &7- &c<caster.hp{round=0}>/<caster.mhp>'
+    Range: 160
+    Color: YELLOW
+    Style: SEGMENTED_10
+
+EllanSeaFrigate:
+  Template: VOTSNPCPirateFrigate
+  Display: '&6&l艾尔岚海防目标 &8- &f海盗护卫舰 &7<&c<caster.hp{round=0}>&7/&c<caster.mhp>&7>'
+  Health: 7000
+  Options:
+    Despawn: NEVER
+    Persistent: true
+  BossBar:
+    Enabled: true
+    Title: '&6海盗护卫舰 &7- &c<caster.hp{round=0}>/<caster.mhp>'
+    Range: 160
+    Color: RED
+    Style: SEGMENTED_10
+
+EllanSeaBattleship:
+  Template: VOTSNPCBattleshipPirate
+  Display: '&c&l艾尔岚海防目标 &8- &f海盗战列舰 &7<&c<caster.hp{round=0}>&7/&c<caster.mhp>&7>'
+  Health: 13000
+  Options:
+    Despawn: NEVER
+    Persistent: true
+  BossBar:
+    Enabled: true
+    Title: '&c海盗战列舰 &7- &c<caster.hp{round=0}>/<caster.mhp>'
+    Range: 180
+    Color: RED
+    Style: SEGMENTED_12
+
+EllanSeaOceanCurse:
+  Template: VOTSNPCOceanCurse4
+  Display: '&5&l艾尔岚海防目标 &8- &f海洋诅咒号 &7<&c<caster.hp{round=0}>&7/&c<caster.mhp>&7>'
+  Health: 22000
+  Options:
+    Despawn: NEVER
+    Persistent: true
+  BossBar:
+    Enabled: true
+    Title: '&5海洋诅咒号 &7- &c<caster.hp{round=0}>/<caster.mhp>'
+    Range: 200
+    Color: PURPLE
+    Style: SEGMENTED_12

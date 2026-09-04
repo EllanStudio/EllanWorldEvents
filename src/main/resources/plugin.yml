@@ -1,0 +1,18 @@
+name: EllanWorldEvents
+version: 1.0.0
+main: com.ellanstudio.worldevents.EllanWorldEventsPlugin
+api-version: '1.21'
+author: EllanStudio
+description: Scheduled sea defense events and scalable dragon encounters for Ellan.
+depend: [MythicMobs]
+softdepend: [PlaceholderAPI, CMI, ExcellentEconomy, EnderDragon]
+commands:
+  ellanworldevents:
+    description: Manage Ellan world events.
+    usage: /ellanworldevents <status|start|stop|reload|anchor>
+    aliases: [ewe]
+    permission: ellanworldevents.admin
+permissions:
+  ellanworldevents.admin:
+    description: Manage Ellan world events.
+    default: op

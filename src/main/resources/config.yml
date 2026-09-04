@@ -1,0 +1,141 @@
+timezone: Asia/Shanghai
+network-broadcast-command: 'cmi bbroadcast !{message} -s:spawn,survival,redstone'
+
+messages:
+  prefix: '&7[&3&l艾尔岚世界事件&7] '
+  no-permission: '&c你没有权限执行此命令。'
+  reloaded: '&a配置已重新加载。'
+  sea-already-active: '&c已有海防事件正在进行。'
+  sea-not-active: '&e当前没有进行中的海防事件。'
+  sea-started: '&b海防哨站发现了 &f{name}&b，坐标 &e{x}, {z}&b！请驾驶战船前往迎击，限时 &f{minutes} 分钟&b。'
+  sea-warning: '&e{name} &7将在 &f{minutes} 分钟&7后撤离，当前坐标 &e{x}, {z}&7。'
+  sea-defeated: '&a{name} 已被击沉！&7共有 &f{count} &7名玩家取得有效贡献，战利品已发放。'
+  sea-expired: '&c{name} 已驶离艾尔岚海域，本次海防行动失败。'
+  sea-reward: '&a海防奖励：&e{coins} 艾尔岚金币&a、&c{reputation} 赤铁原声望&a。'
+  sea-item-reward: '&a额外战利品：&f{item} x{amount}'
+  sea-pending-reward: '&a你离线期间获得的海防战利品已补发。'
+  sea-schedule-skipped: '&e定时海防事件未能开始：{reason}'
+  dragon-scaled: '&5猎龙队评估完成：&f{name} &5已按 &e{players} &5名参战者强化至 &c{health} &5生命。'
+  dragon-phase-75: '&b{name} 撕裂气流，震退了周围的猎龙者！'
+  dragon-phase-50: '&d{name} 召唤了四枚虚空结晶，摧毁它们可解除伤害减免！'
+  dragon-phase-25: '&c{name} 已进入狂暴阶段，攻击威力大幅提升！'
+
+sea-events:
+  enabled: true
+  world: world
+  duration-minutes: 40
+  nearby-radius: 120
+  nearby-qualify-seconds: 90
+  minimum-damage-share: 0.02
+  chunk-ticket-radius: 1
+  schedules:
+    evening:
+      days: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]
+      time: '18:30'
+      tiers: [galley, frigate]
+      priority: 10
+    night:
+      days: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SUNDAY]
+      time: '22:30'
+      tiers: [frigate, battleship, ocean_curse]
+      priority: 10
+    saturday-night:
+      days: [SATURDAY]
+      time: '22:30'
+      tiers: [ocean_curse]
+      priority: 100
+  anchors:
+    - id: northeast_ocean
+      world: world
+      x: 1088.5
+      y: 65.0
+      z: 256.5
+      yaw: 135.0
+    - id: northwest_ocean
+      world: world
+      x: -1351.5
+      y: 65.0
+      z: 852.5
+      yaw: -135.0
+    - id: southwest_ocean
+      world: world
+      x: -1267.5
+      y: 65.0
+      z: -1271.5
+      yaw: -45.0
+    - id: southeast_ocean
+      world: world
+      x: 1140.5
+      y: 65.0
+      z: -1739.5
+      yaw: 45.0
+  tiers:
+    galley:
+      name: '&e海盗桨帆船'
+      mythic-mob: EllanSeaGalley
+      health: 3500
+      coin-pool: 1800
+      per-player-coin-cap: 700
+      reputation: 1
+      item-rewards:
+        - 'VOTSAmmoCannonBall 4 1.0 舰炮弹药'
+        - 'VOTSShipRepairWeak 1 0.45 简易维修工具'
+    frigate:
+      name: '&6海盗护卫舰'
+      mythic-mob: EllanSeaFrigate
+      health: 7000
+      coin-pool: 4000
+      per-player-coin-cap: 1300
+      reputation: 2
+      item-rewards:
+        - 'VOTSAmmoCannonBall 8 1.0 舰炮弹药'
+        - 'VOTSShipRepairMedium 1 0.40 标准维修工具'
+      top-reward: 'VOTSBlueprintFrigate 1 0.08 护卫舰蓝图'
+    battleship:
+      name: '&c海盗战列舰'
+      mythic-mob: EllanSeaBattleship
+      health: 13000
+      coin-pool: 7000
+      per-player-coin-cap: 2200
+      reputation: 4
+      item-rewards:
+        - 'VOTSAmmoCannonBall 12 1.0 舰炮弹药'
+        - 'VOTSShipRepairStrong 1 0.45 高级维修工具'
+      top-reward: 'VOTSBlueprintBattleship 1 0.05 战列舰蓝图'
+    ocean_curse:
+      name: '&5海洋诅咒号'
+      mythic-mob: EllanSeaOceanCurse
+      health: 22000
+      coin-pool: 12000
+      per-player-coin-cap: 3500
+      reputation: 7
+      item-rewards:
+        - 'VOTSAmmoCannonBall 18 1.0 舰炮弹药'
+        - 'VOTSShipRepairStrong 2 0.60 高级维修工具'
+      top-reward: 'VOTSBlueprintOceanCurse 1 0.025 海洋诅咒号蓝图'
+
+dragons:
+  enabled: true
+  participant-radius: 256
+  participant-scale-per-extra-player: 0.30
+  max-scaling-players: 8
+  crystal-shield-damage-multiplier: 0.30
+  crystal-shield-timeout-seconds: 30
+  enrage-damage-multiplier: 1.25
+  types:
+    gale_hunter:
+      display-name-contains: 裂风猎龙
+      base-health: 4000
+      per-hit-cap-percent: 0.040
+    crimson_tyrant:
+      display-name-contains: 赤晶暴君
+      base-health: 7000
+      per-hit-cap-percent: 0.035
+    void_devourer:
+      display-name-contains: 虚空吞噬者
+      base-health: 11000
+      per-hit-cap-percent: 0.030
+    starfall_ender:
+      display-name-contains: 星蚀终焉龙
+      base-health: 16000
+      per-hit-cap-percent: 0.025

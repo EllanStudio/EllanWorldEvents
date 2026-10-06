@@ -5,9 +5,13 @@ plugins {
 group = 'com.ellanstudio'
 version = '1.0.0'
 
+def paperApiVersion = providers.gradleProperty('paperApiVersion').orElse('26.3.build.157-beta').get()
+def javaToolchainVersion = providers.gradleProperty('javaToolchain').orElse('25').get().toInteger()
+def javaRelease = providers.gradleProperty('javaRelease').orElse('21').get().toInteger()
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
+        languageVersion = JavaLanguageVersion.of(javaToolchainVersion)
     }
 }
 
@@ -19,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:26.3.build.157-beta'
+    compileOnly "io.papermc.paper:paper-api:${paperApiVersion}"
     compileOnly 'io.lumine:Mythic-Dist:5.12.1'
     compileOnly 'me.clip:placeholderapi:2.11.6'
 
@@ -30,7 +34,7 @@ dependencies {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.release = 25
+    options.release = javaRelease
 }
 
 tasks.named('jar') {

@@ -11,7 +11,7 @@
 
 ## 构建
 
-需要 JDK 21：
+需要 JDK 25（Paper API compile target: `26.3.build.157-beta`）：
 
 ```bash
 ./gradlew clean test build
